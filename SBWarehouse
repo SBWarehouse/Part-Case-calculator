@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Proportion Calculator</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #f2f2f2;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }
+    .container {
+      background: white;
+      padding: 30px;
+      border-radius: 10px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+      text-align: center;
+      width: 320px;
+    }
+    input {
+      width: 60px;
+      padding: 5px;
+      margin: 5px;
+      font-size: 1rem;
+      text-align: center;
+    }
+    button {
+      margin-top: 15px;
+      padding: 10px 20px;
+      font-size: 1rem;
+      border: none;
+      border-radius: 5px;
+      background: #4CAF50;
+      color: white;
+      cursor: pointer;
+    }
+    button:hover {
+      background: #45a049;
+    }
+    .result {
+      margin-top: 15px;
+      font-size: 1.2rem;
+      font-weight: bold;
+      color: #333;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h2>Proportion Calculator</h2>
+    <p>
+      <input type="number" id="a" placeholder="a"> :
+      <input type="number" id="b" placeholder="b"> = 
+      <input type="number" id="x" placeholder="x"> :
+      <input type="number" id="d" placeholder="d">
+    </p>
+    <button onclick="calculateProportion()">Calculate</button>
+    <div class="result" id="result"></div>
+  </div>
+
+  <script>
+    function calculateProportion() {
+      const a = parseFloat(document.getElementById('a').value);
+      const b = parseFloat(document.getElementById('b').value);
+      const x = document.getElementById('x').value;
+      const d = parseFloat(document.getElementById('d').value);
+      let resultText = "";
+
+      if (!isNaN(a) && !isNaN(b) && x === "" && !isNaN(d)) {
+        const xValue = (a * d) / b;
+        resultText = `x = ${xValue.toFixed(4)}`;
+      } else if (x !== "" && !isNaN(b) && !isNaN(d) && isNaN(a)) {
+        const aValue = (parseFloat(x) * b) / d;
+        resultText = `a = ${aValue.toFixed(4)}`;
+      } else if (!isNaN(a) && x !== "" && !isNaN(d) && isNaN(b)) {
+        const bValue = (a * d) / parseFloat(x);
+        resultText = `b = ${bValue.toFixed(4)}`;
+      } else if (!isNaN(a) && !isNaN(b) && x !== "" && isNaN(d)) {
+        const dValue = (b * parseFloat(x)) / a;
+        resultText = `d = ${dValue.toFixed(4)}`;
+      } else {
+        resultText = "Please fill in any 3 fields to calculate the missing value.";
+      }
+
+      document.getElementById('result').innerText = resultText;
+    }
+  </script>
+</body>
+</html>
